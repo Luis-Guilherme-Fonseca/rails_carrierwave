@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @post.title %></h1>
 
-<%= link_to(image_tag(@post.image.thumb.url, alt: 'Image'), @post.image.url, target: '_blank') if @post.image? %>
-
+<% if @post.attachments? %>
+  <ul>
+    <% @post.attachments.each do |attachment| %>
+      <li><%= link_to(image_tag(attachment.thumb.url, alt: 'Image'), attachment.url, target: '_blank')  %></li>  
+    <% end %>
+  </ul>
+<% end %>
 <p><%= @post.body %></p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
